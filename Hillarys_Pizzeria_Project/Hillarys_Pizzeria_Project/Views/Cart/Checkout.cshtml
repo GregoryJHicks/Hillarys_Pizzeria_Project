@@ -1,0 +1,12 @@
+﻿
+
+@{
+    if(Cart.IsNotEmpty())
+    {
+        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Payment">To Payment</a>
+    }
+    else
+    {
+        <p>Nothing to purchase</p>
+    }
+}

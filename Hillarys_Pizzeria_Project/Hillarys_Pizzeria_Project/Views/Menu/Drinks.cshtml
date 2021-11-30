@@ -1,0 +1,19 @@
+﻿@model List<Hillarys_Pizzeria_Project.Models.MenuItem>
+@using Hillarys_Pizzeria_Project.Controllers;
+
+@{
+    ViewData["Title"] = "Drinks Menu";
+}
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Back to Menu Selection</a>
+
+@{
+    foreach (var item in Model)
+    {
+        <p>
+        @item.food_id @item.food_name @item.description @item.price
+        </p>
+        @Html.ActionLink("Add To Cart", "AddToCart", new { food_id = item.food_id, menu = MenuType.Drinks})
+        <br />
+    }
+}

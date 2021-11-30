@@ -1,0 +1,20 @@
+[
+  {
+    "food_id": 200,
+    "food_name": "Fries",
+    "price": 1.99,
+    "description": "Classic steak cut french fries"
+  },
+  {
+    "food_id": 201,
+    "food_name": "Ceaser Salad",
+    "price": 3.99,
+    "description": "Classic Cesear Salad"
+  },
+  {
+    "food_id": -1,
+    "food_name": "",
+    "price": -1,
+    "description": ""
+  }
+]
