@@ -1,0 +1,20 @@
+[
+  {
+    "food_id": 300,
+    "food_name": "Coke",
+    "price": 3.99,
+    "description": "Its Coke"
+  },
+  {
+    "food_id": 301,
+    "food_name": "Dr. Pepper",
+    "price": 3.99,
+    "description": "Its Dr. Pepper"
+  },
+  {
+    "food_id": -1,
+    "food_name": "",
+    "price": -1,
+    "description": ""
+  }
+]

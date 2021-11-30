@@ -1,0 +1,20 @@
+[
+  {
+    "food_id": 100,
+    "food_name": "Pepperoni Pizza",
+    "price": 3.99,
+    "description": "Its your classic Pepperoni Pizza"
+  },
+  {
+    "food_id": 101,
+    "food_name": "Cheese Pizza",
+    "price": 3.99,
+    "description": "Just boring old Cheese Pizza"
+  },
+  {
+    "food_id": -1,
+    "food_name": "",
+    "price": -1,
+    "description": ""
+  }
+]

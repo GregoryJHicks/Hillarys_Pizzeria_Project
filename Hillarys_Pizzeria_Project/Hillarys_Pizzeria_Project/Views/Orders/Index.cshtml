@@ -1,0 +1,15 @@
+﻿@using Hillarys_Pizzeria_Project.Controllers;
+
+@{
+    if (PlacedOrderList.contents.Count() > 0)
+    {
+        foreach (Order item in PlacedOrderList.contents)
+        {
+            <p>
+                @item.OrderID
+            </p>
+            @Html.ActionLink("View Receipt", "Receipt", new { targetID = item.OrderID})
+            <br />
+        }
+    }
+}

@@ -1,0 +1,28 @@
+﻿<h1>
+    Test
+</h1>
+
+<p>
+    Number of items in cart: @Cart.contents.Count()
+</p>
+<br />
+
+@{
+    if(Cart.contents.Count() > 0)
+    {
+        foreach(MenuItem item in Cart.contents)
+        {
+            <p>
+                Food item: @item.food_name
+            </p>
+            <br />
+        }
+    }
+}
+
+@{
+    if(Cart.IsNotEmpty())
+    {
+        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Checkout">To Checkout</a>
+    }
+}

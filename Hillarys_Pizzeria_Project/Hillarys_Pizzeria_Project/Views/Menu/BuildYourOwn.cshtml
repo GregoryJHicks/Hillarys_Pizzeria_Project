@@ -1,0 +1,44 @@
+﻿@model List<Hillarys_Pizzeria_Project.Models.MenuItem>
+@using Hillarys_Pizzeria_Project.Controllers;
+
+@{
+    ViewData["Title"] = "Build Your Own Pizza";
+}
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Back to Pizza Menu</a>
+
+<p>Number of options select: @BuildYourOwnCart.contents.Count()</p>
+
+@{
+    if (BuildYourOwnCart.IsNotEmpty())
+    {
+        <p>Current options selected:</p>
+        foreach(MenuItem item in BuildYourOwnCart.contents)
+        {
+            <p>
+            @item.food_name
+            </p>
+            <br />
+        }
+        <br />
+    }
+}
+
+@{
+    foreach (var item in Model)
+    {
+        <p>
+        @item.food_id @item.food_name @item.description @item.price
+        </p>
+        @Html.ActionLink("Add Option", "AddToBuildYourOwnCart", new { targetFoodID = item.food_id})
+        @Html.ActionLink("Test Add", "AddToCart", new { food_id = item.food_id, menu = MenuType.Custom})
+    <br />
+    }
+}
+
+@{
+    if (BuildYourOwnCart.IsNotEmpty())
+    {
+       <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="CreateBuildYourOwn">Add to Cart</a>
+    }
+}

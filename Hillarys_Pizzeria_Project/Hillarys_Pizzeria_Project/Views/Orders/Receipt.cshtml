@@ -1,0 +1,16 @@
+﻿@model Hillarys_Pizzeria_Project.Models.Order;
+
+@{
+    if (Model.Content != null && Model.Content.Count() > 0)
+    {
+        foreach(MenuItem item in Model.Content)
+        {
+            <p>@item.food_name</p>
+            <br />
+        }
+    }
+    else
+    {
+        <p>Error: No order was found.</p>
+    }
+}
