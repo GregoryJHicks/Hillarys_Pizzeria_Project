@@ -26,5 +26,10 @@ namespace Hillarys_Pizzeria_Project.Controllers
                 return RedirectToAction("Receipt");
             }
         }
+
+        public IActionResult GenerateNewOrder()
+        {
+            return RedirectToAction("Receipt", PlacedOrderList.MostRecentID());
+        }
     }
 }
