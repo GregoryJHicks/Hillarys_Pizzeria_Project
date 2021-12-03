@@ -6,29 +6,46 @@ namespace Hillarys_Pizzeria_Project.Controllers
 {
     public class MenuController : Controller
     {
+
+
+        //Postcondition:    Generates the MenuController's Index view
         public IActionResult Index()
         {
             return View();
         }
 
+
+        //Postcondition:    Generates the MenuController's Pizzas view and passes it a List<MenuItem> model
+        //                  consisting of the pizza menu
         public IActionResult Pizzas()
         {
             List<MenuItem> menu = LoadJson(MenuType.Pizza);
             return View(menu);
         }
 
+
+        //Postcondition:    Generates the MenuController's Sides view and passes it a List<MenuItem> model
+        //                  consisting of the sides menu
         public IActionResult Sides()
         {
             List<MenuItem> menu = LoadJson(MenuType.Sides);
             return View(menu);
         }
 
+
+        //Postcondition:    Generates the MenuController's Drinks view and passes it a List<MenuItem> model
+        //                  consisting of the drinks menu
         public IActionResult Drinks()
         {
             List<MenuItem> menu = LoadJson(MenuType.Drinks);
             return View(menu);
         }
 
+
+        //Precondition:     Must be passed a valid MenuItem's id
+        //Postcondition:    Generates the MenuController's CustomizeDrinkView view and passes it a List<MenuItem>
+        //                  model consisting of the list of available beverage sizes, and the selected item added
+        //                  as the last item to the list
         public IActionResult CustomizeDrinkView(int selectedItemID)
         {
             List<MenuItem> drinks = LoadJson(MenuType.Drinks);
@@ -48,6 +65,11 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View(beverageSizes);
         }
 
+
+        //Precondition:     Must be passed a valid MenuItem's id
+        //Postcondition:    Generates the MenuController's CustomizePizzaView view and passes it a List<MenuItem>
+        //                  model consisting of the list of available pizza customization options, and the
+        //                  selected item added as the last item to the list
         public IActionResult CustomizePizzaView(int selectedItemID)
         {
             List<MenuItem> pizzas = LoadJson(MenuType.Pizza);
@@ -67,33 +89,10 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View(pizzaCustomization);
         }
 
-        public IActionResult CustomizeItem(MenuType type, int selectedItemID)
-        {
-            List<MenuItem> list, menu;
-            switch (type)
-            {
-                case MenuType.PizzaCustomization:
-                    list = LoadJson(MenuType.PizzaCustomization);
-                    menu = LoadJson(MenuType.Pizza);
-                    break;
-                default: //Drinks options
-                    list = LoadJson(MenuType.BeverageSizes);
-                    menu = LoadJson(MenuType.Drinks);
-                    break;
-            }
 
-            foreach (MenuItem item in menu)
-            {
-                if (item.food_id == selectedItemID)
-                {
-                    list.Add(item);
-                    break;
-                }
-            }
-
-            return View(list);
-        }
-
+        //Precondition:     Must be passed a valid MenuType variable indicating the desired file
+        //Postcondition:    Resturns a List<MenuItem> containing the contents from the json file indicated by
+        //                  the given parameter
         public List<MenuItem> LoadJson(MenuType type)
         {
             List<MenuItem> tempList = new List<MenuItem>();
@@ -101,6 +100,17 @@ namespace Hillarys_Pizzeria_Project.Controllers
             StreamReader stream;
             string file;
 
+            switch (type)
+            {
+                case MenuType.Pizza:
+                case MenuType.Sides:
+                case MenuType.Drinks:
+                    file = "FullMenu.json";
+                    break;
+                default:
+                    file = "Customization.json";
+                    break;
+            }
             if (type == MenuType.Pizza)
             {
                 file = "FullMenu.json";
@@ -179,6 +189,10 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return menu;
         }
 
+
+        //Precondition:     Must be passed a valid int variable, indicating the selected item
+        //Postcondition:    Resets the toppings held in the static class CustomizePizza and redirects the program
+        //                  to the CustomizePizzaView method with the selecteditem's id as the parameter
         public IActionResult ResetToppingSelecion(int selectedItemID)
         {
             List<MenuItem> pizza = LoadJson(MenuType.Pizza);
@@ -196,6 +210,11 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
         }
 
+
+        //Precondition:     Must be passed a valid int variable indicating the desired topping, and must be passed
+        //                  a valid int variable indicating the desired selected item
+        //Postcondition:    Adds the topping indicated by the first parameter to the static CustomizePizza and 
+        //                  redirects to the CustomizePizzaView method with the selected item's id as the parameter
         public IActionResult AddTopping(int toppingID, int selectedItemID)
         {
             List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
@@ -222,6 +241,11 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
         }
 
+
+        //Precondition:     Must be passed a valid int variable indicating the desired size, and must be passed an
+        //                  int variable indicating the desired selected item
+        //Postcondition:    Sets the static CustomizePizza's size to the size indicated by the first parameter and
+        //                  redirects to the CustomizePizzaView method with the selected item's id as the parameter
         public IActionResult SetPizzaSize(int sizeID, int selectedItemID)
         {
             List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
@@ -248,6 +272,11 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
         }
 
+
+        //Precondition:     Must be passed a valid int variable indicating the desired crust, and must be passed an
+        //                  int variable indicating the desired selected item
+        //Postcondition:    Sets the static CustomizePizza's crust to the crust indicated by the first parameter and
+        //                  redirects to the CustomizePizzaView method with the selected item's id as the parameter
         public IActionResult SetPizzaCrust(int crustID, int selectedItemID)
         {
             List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
@@ -274,6 +303,11 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
         }
 
+
+        //Precondition:     Must be passed a valid int variable indicating the desired size, and must be passed a
+        //                  valid int variable indicating the desired selected item
+        //Postcondition:    Set's the static CustomizeDrink's size to the size indicated by the first parameter and
+        //                  redirects to the CustomizeDrinkView method with the selected item's id as the parameter
         public IActionResult SetDrinkSize(int sizeID, int selectedItemID)
         {
             List<MenuItem> sizeOptions = LoadJson(MenuType.BeverageSizes);
@@ -301,6 +335,10 @@ namespace Hillarys_Pizzeria_Project.Controllers
         }
 
 
+        //Precondition:     Must be passed a valid int indicating the desired selected item and must be passed a
+        //                  valid MenuType indicating the desired menu
+        //Postcondition:    Uses the appropriate methods to add the correct item indicated by both parameters to the
+        //                  static cart class and resets any necessary static classes
         public IActionResult AddToCart(int selectedItemID, MenuType menu)
         {
             List<MenuItem> menuItems = LoadJson(menu);
