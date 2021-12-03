@@ -8675,23 +8675,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\auhso\\.nuget\\packages\\": {},
+    "C:\\Users\\Greg\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\SWE project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project.csproj",
+      "projectUniqueName": "C:\\Users\\Greg\\Desktop\\Software_Engineering\\Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project.csproj",
       "projectName": "Hillarys_Pizzeria_Project",
-      "projectPath": "E:\\SWE project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project.csproj",
-      "packagesPath": "C:\\Users\\auhso\\.nuget\\packages\\",
-      "outputPath": "E:\\SWE project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\obj\\",
+      "projectPath": "C:\\Users\\Greg\\Desktop\\Software_Engineering\\Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project.csproj",
+      "packagesPath": "C:\\Users\\Greg\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Greg\\Desktop\\Software_Engineering\\Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\Hillarys_Pizzeria_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\auhso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Greg\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

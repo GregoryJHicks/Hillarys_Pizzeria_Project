@@ -14,9 +14,7 @@
         <p>
         @item.food_id @item.food_name @item.description @item.price
         </p>
-        @Html.ActionLink("Add To Cart", "AddToCart", new { food_id = item.food_id, menu = MenuType.Pizza})
+        @Html.ActionLink("Add To Cart", "CustomizeItem", new { menu = MenuType.PizzaCustomization})
         <br />
     }
 }
-
-<a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="BuildYourOwn">Build Your Own Pizza</a>
