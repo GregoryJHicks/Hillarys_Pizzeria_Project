@@ -747,3 +747,5 @@ C:\Users\Greg\Desktop\Software_Engineering\Project\Hillarys_Pizzeria_Project\Hil
 C:\Users\Greg\Desktop\Software_Engineering\Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\obj\Debug\net6.0\ref\Hillarys_Pizzeria_Project.dll
 C:\Users\Greg\Desktop\Software_Engineering\Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\obj\Debug\net6.0\Hillarys_Pizzeria_Project.pdb
 C:\Users\Greg\Desktop\Software_Engineering\Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\obj\Debug\net6.0\Hillarys_Pizzeria_Project.genruntimeconfig.cache
+E:\SWE project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\bin\Debug\net6.0\Customization.json
+E:\SWE project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\Hillarys_Pizzeria_Project\bin\Debug\net6.0\FullMenu.json
