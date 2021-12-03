@@ -14,7 +14,7 @@
         <p>
         @item.food_id @item.food_name @item.description @item.price
         </p>
-        @Html.ActionLink("Add To Cart", "CustomizeItem", new { menu = MenuType.PizzaCustomization})
+        @Html.ActionLink("Add To Cart", "CustomizeItem", new { menu = MenuType.PizzaCustomization, selectedItemID = item.food_id})
         <br />
     }
 }

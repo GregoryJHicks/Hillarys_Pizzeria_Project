@@ -1,0 +1,160 @@
+﻿@model List<Hillarys_Pizzeria_Project.Models.MenuItem>
+@using Hillarys_Pizzeria_Project.Controllers
+
+
+@{
+    MenuItem selectedPizza = Model[Model.Count - 1];
+    List<MenuItem> toppings = new List<MenuItem>();
+    List<MenuItem> sizes = new List<MenuItem>();
+    List<MenuItem> crusts = new List<MenuItem>();
+
+    foreach (MenuItem item in Model)
+    {
+        if (item != selectedPizza)
+        {
+            if (100 <= item.food_id & item.food_id <= 199)
+            {
+                toppings.Add(item);
+            }
+            else if (200 <= item.food_id & item.food_id <= 299)
+            {
+                sizes.Add(item);
+            }
+            else if (300 <= item.food_id & item.food_id <= 399)
+            {
+                crusts.Add(item);
+            }
+        }
+    }
+}
+
+
+<h1>CustomizePizza.cshtml</h1>
+
+<p>Customizing: @selectedPizza.food_name</p>
+<p>Base price: $@selectedPizza.price</p>
+<br />
+
+@{
+    //Current Selection Display Section - Start
+
+    <br />
+    //Selected size
+    if (CustomizePizza.isSizeSelected)
+    {
+        <p>Current selected size: @CustomizePizza.selectedSize.food_name</p>
+        <p>Selected size price: +$@CustomizePizza.selectedSize.price</p>
+    }
+    else
+    {
+        <p>No currently selected size.</p>
+    }
+
+    <br />
+    //Selected crust
+    if (CustomizePizza.isCrustSelected)
+    {
+        <p>Current selected crust: @CustomizePizza.selectedCrust.food_name</p>
+        <p>Selected crust price: +$@CustomizePizza.selectedCrust.price</p>
+    }
+    else
+    {
+        <p>No currently selected crust.</p>
+    }
+
+    <br />
+    //Selected toppings
+        if (CustomizePizza.toppingsCount > 0)
+    {
+        <p>Current selected toppings:</p>
+
+        decimal totalToppingCost = 0;
+        foreach (MenuItem item in CustomizePizza.toppings)
+        {
+            <p>@item.food_name : +$@item.price</p>
+            totalToppingCost += item.price;
+        }
+        int toppingsRemaining = 4 - CustomizePizza.toppingsCount;
+
+        <p>Current cost of all toppings: +$@totalToppingCost</p>
+        <p>You have @toppingsRemaining toppings remaining.</p>
+        <p>
+            @Html.ActionLink("Reset your topping selection", "ResetToppingSelecion", 
+                new {selectedItemID = selectedPizza.food_id})
+        </p>
+    }
+    else
+    {
+        <p>No currently selected toppings.</p>
+    }
+    //Current Selection Display Section - End
+}
+    
+@{
+    //Option Selection Section - Start
+    //Toppings
+    if (CustomizePizza.toppingsCount < 4)
+    {
+        <br />
+        <br />
+        <p>Toppings (Max of 4 toppings per pizza):</p>
+        foreach (MenuItem item in toppings)
+        {
+            <p>@item.food_name : +$@item.price</p>
+            <p>    
+                @Html.ActionLink("Add " + item.food_name + " to selection", 
+                    "AddTopping", new {toppingID = item.food_id, selectedItemID = selectedPizza.food_id})
+            </p>
+        }
+    }
+
+    //Size
+    <br />
+    <br />
+    <p>Sizes:</p>
+    foreach (MenuItem item in sizes)
+    {
+        <p>@item.food_name : +$@item.price</p>
+        <p>    
+            @Html.ActionLink("Select " + @item.food_name, "SetPizzaSize", new {sizeID = item.food_id, 
+                selectedItemID = selectedPizza.food_id})
+        </p>
+    }
+
+    //Crust
+    <br />
+    <br />
+    <p>Crusts:</p>
+    foreach (MenuItem item in crusts)
+    {
+        <p>@item.food_name : +$@item.price</p>
+        <p>    
+            @Html.ActionLink("Select " + @item.food_name, "SetPizzaCrust", new {crustID = item.food_id, 
+                selectedItemID = selectedPizza.food_id})
+        </p>
+    }
+    //Option Selection Section - End
+}
+
+@{
+    //Add to Cart - Start
+    <br />
+    <br />
+    if (CustomizePizza.isSizeSelected & CustomizePizza.isCrustSelected)
+    {
+        @Html.ActionLink("Add " + selectedPizza.food_name + " to cart", "AddToCart", 
+            new {selectedItemID = selectedPizza.food_id, menu = MenuType.Pizza})
+    }
+    else
+    {
+        if (!CustomizePizza.isSizeSelected)
+        {
+            <p>Please select a size before adding your selection to your cart.</p>
+        }
+        if (!CustomizePizza.isCrustSelected)
+        {
+            <p>Please select a crust before adding your selection to your cart.</p>
+        }
+    }
+    //Add to Cart - End
+}
