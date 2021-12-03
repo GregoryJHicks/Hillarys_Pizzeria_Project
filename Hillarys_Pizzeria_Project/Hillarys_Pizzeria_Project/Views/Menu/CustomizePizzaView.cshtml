@@ -29,45 +29,42 @@
 }
 
 
-<h1>CustomizePizza.cshtml</h1>
+<h1>Make your own pizza!</h1>
 
-<p>Customizing: @selectedPizza.food_name</p>
+<p style="font-size: x-large;">Customizing: @selectedPizza.food_name</p>
 <p>Base price: $@selectedPizza.price</p>
-<br />
 
 @{
     //Current Selection Display Section - Start
-
     <br />
     //Selected size
     if (CustomizePizza.isSizeSelected)
     {
-        <p>Current selected size: @CustomizePizza.selectedSize.food_name</p>
-        <p>Selected size price: +$@CustomizePizza.selectedSize.price</p>
+        <p style="font-size: x-large;">Current selected size: @CustomizePizza.selectedSize.food_name</p>
+       <p style="font-size: large;">Selected size price: +$@CustomizePizza.selectedSize.price</p>
     }
     else
     {
-        <p>No currently selected size.</p>
+        <p style="font-size: x-large;">No currently selected size.</p>
     }
 
     <br />
     //Selected crust
     if (CustomizePizza.isCrustSelected)
     {
-        <p>Current selected crust: @CustomizePizza.selectedCrust.food_name</p>
-        <p>Selected crust price: +$@CustomizePizza.selectedCrust.price</p>
+        <p style="font-size: x-large;">Current selected crust: @CustomizePizza.selectedCrust.food_name</p>
+        <p style="font-size: large;">Selected crust price: +$@CustomizePizza.selectedCrust.price</p>
     }
     else
     {
-        <p>No currently selected crust.</p>
+        <p style="font-size: x-large;">No currently selected crust.</p>
     }
 
     <br />
     //Selected toppings
         if (CustomizePizza.toppingsCount > 0)
     {
-        <p>Current selected toppings:</p>
-
+        <p style="font-size: x-large;">Current selected toppings:</p>
         decimal totalToppingCost = 0;
         foreach (MenuItem item in CustomizePizza.toppings)
         {
@@ -82,10 +79,12 @@
             @Html.ActionLink("Reset your topping selection", "ResetToppingSelecion", 
                 new {selectedItemID = selectedPizza.food_id})
         </p>
+        <hr/>
     }
     else
     {
-        <p>No currently selected toppings.</p>
+        <p style="font-size: x-large;">No currently selected toppings.</p>
+        <hr/>
     }
     //Current Selection Display Section - End
 }
@@ -97,7 +96,7 @@
     {
         <br />
         <br />
-        <p>Toppings (Max of 4 toppings per pizza):</p>
+        <p style="font-size: x-large;">Toppings (Max of 4 toppings per pizza):</p>
         foreach (MenuItem item in toppings)
         {
             <p>@item.food_name : +$@item.price</p>
@@ -105,13 +104,15 @@
                 @Html.ActionLink("Add " + item.food_name + " to selection", 
                     "AddTopping", new {toppingID = item.food_id, selectedItemID = selectedPizza.food_id})
             </p>
+            <br />
         }
     }
+    <hr/>
 
     //Size
     <br />
     <br />
-    <p>Sizes:</p>
+    <p style="font-size: x-large;">Sizes:</p>
     foreach (MenuItem item in sizes)
     {
         <p>@item.food_name : +$@item.price</p>
@@ -119,12 +120,14 @@
             @Html.ActionLink("Select " + @item.food_name, "SetPizzaSize", new {sizeID = item.food_id, 
                 selectedItemID = selectedPizza.food_id})
         </p>
+        <br />
     }
+    <hr/>
 
     //Crust
     <br />
     <br />
-    <p>Crusts:</p>
+    <p style="font-size: x-large;">Crusts:</p>
     foreach (MenuItem item in crusts)
     {
         <p>@item.food_name : +$@item.price</p>
@@ -132,7 +135,9 @@
             @Html.ActionLink("Select " + @item.food_name, "SetPizzaCrust", new {crustID = item.food_id, 
                 selectedItemID = selectedPizza.food_id})
         </p>
+        <br />
     }
+    <hr/>
     //Option Selection Section - End
 }
 
