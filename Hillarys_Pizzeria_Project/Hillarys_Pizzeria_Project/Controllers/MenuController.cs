@@ -29,91 +29,169 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View(menu);
         }
 
-        public IActionResult BuildYourOwn()
+        public IActionResult CustomizeItem(MenuType type, int ID)
         {
-            List<MenuItem> menu = LoadJson(MenuType.Custom);
-            return View(menu);
+            List<MenuItem> list, menu;
+            switch (type)
+            {
+                case MenuType.PizzaCustomization:
+                    list = LoadJson(MenuType.PizzaCustomization);
+                    menu = LoadJson(MenuType.Pizza);
+                    break;
+                default: //Sides options
+                    list = LoadJson(MenuType.BeverageSizes);
+                    menu = LoadJson(MenuType.Drinks);
+                    break;
+            }
+
+            foreach (MenuItem item in menu)
+            {
+                if (item.food_id == ID)
+                {
+                    list.Add(item);
+                    break;
+                }
+            }
+
+            return View(list);
         }
 
         public List<MenuItem> LoadJson(MenuType type)
         {
+            List<MenuItem> tempList = new List<MenuItem>();
             List<MenuItem> menu = new List<MenuItem>();
             StreamReader stream;
-            string file = "";
-            
-            switch (type)
+            string file;
+
+            if (type == MenuType.Pizza)
             {
-                case MenuType.Pizza:
-                    file = "PizzaMenu.json";
-                    break;
-                case MenuType.Sides:
-                    file = "SidesMenu.json";
-                    break;
-                case MenuType.Drinks:
-                    file = "DrinksMenu.json";
-                    break;
-                case MenuType.Custom:
-                    file = "CustomizationOptions.json";
-                    break;
+                file = "FullMenu.json";
             }
+            else if (type == MenuType.Sides)
+            {
+                file = "FullMenu.json";
+            }
+            else if (type == MenuType.Drinks)
+            {
+                file = "FullMenu.json";
+            }
+            else
+            {
+                file = "Customization.json";
+            }
+
             using (stream = new StreamReader(file))
             {
                 string json = stream.ReadToEnd();
-                menu = JsonConvert.DeserializeObject<List<MenuItem>>(json);
+                tempList = JsonConvert.DeserializeObject<List<MenuItem>>(json);
             }
+
+            switch (type)
+            {
+                case MenuType.PizzaCustomization:
+                    foreach (MenuItem item in tempList)
+                    {
+                        if (100 <= item.food_id & item.food_id <= 399)
+                        {
+                            menu.Add(item);
+                        }
+                    }
+                    break;
+                case MenuType.Pizza:
+                    foreach(MenuItem item in tempList)
+                    {
+                        if (100 <= item.food_id & item.food_id <= 199)
+                        {
+                            menu.Add(item);
+                        }
+                    }
+                    break;
+                case MenuType.Sides:
+                    foreach (MenuItem item in tempList)
+                    {
+                        if (200 <= item.food_id & item.food_id <= 299)
+                        {
+                            menu.Add(item);
+                        }
+                    }
+                    break;
+                case MenuType.Drinks:
+                    foreach (MenuItem item in tempList)
+                    {
+                        if (300 <= item.food_id & item.food_id <= 399)
+                        {
+                            menu.Add(item);
+                        }
+                    }
+                    break;
+                case MenuType.BeverageSizes:
+                    foreach (MenuItem item in tempList)
+                    {
+                        if (400 <= item.food_id & item.food_id <= 499)
+                        {
+                            menu.Add(item);
+                        }
+                    }
+                    break;
+                default:
+                    menu = tempList;
+                    break;
+            }
+
             return menu;
         }
 
-        public IActionResult AddToCart(int food_id, MenuType menu)
+        public IActionResult ResetToppingSelecion(MenuItem selectedItem)
         {
-            List<MenuItem> tempMenu = LoadJson(menu);
-            MenuItem target = new MenuItem();
+            CustomizePizza.ResetToppings();
+            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
+        }
 
-            foreach (MenuItem item in tempMenu)
+        public IActionResult AddPizzaTopping(MenuItem topping, MenuItem selectedItem)
+        {
+            CustomizePizza.AddTopping(topping);
+            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
+        }
+
+        public IActionResult SetPizzaSize(MenuItem size, MenuItem selectedItem)
+        {
+            CustomizePizza.SelectSize(size);
+            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
+        }
+
+        public IActionResult SetPizzaCrust(MenuItem crust, MenuItem selectedItem)
+        {
+            CustomizePizza.SelectCrust(crust);
+            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
+        }
+
+        public IActionResult SetDrinkSize(MenuItem size, MenuItem selectedItem)
+        {
+            CustomizeDrink.SelectSize(size);
+            return RedirectToAction("CustomizeItem", new { type = MenuType.BeverageSizes, ID = selectedItem.food_id });
+        }
+
+
+        public IActionResult AddToCart(MenuItem item, MenuType menu)
+        {
+             switch (menu)
             {
-                if (item.food_id == food_id)
-                {
-                    target = item;
-                }
-            }
-
-            Cart.AddToCart(target);
-
-            switch(menu)
-            {
-                case MenuType.Pizza:
-                    return RedirectToAction("Pizzas");
-                case MenuType.Sides:
-                    return RedirectToAction("Sides");
-                case MenuType.Drinks:
+                case MenuType.BeverageSizes:
+                    CustomizeDrink.SendToCart(item);
                     return RedirectToAction("Drinks");
-                case MenuType.Custom:
+
+                case MenuType.PizzaCustomization:
+                    CustomizePizza.SendToCart(item);
                     return RedirectToAction("Pizzas");
+
+                case MenuType.Sides:
+                    Cart.AddToCart(item);
+                    return RedirectToAction("Sides");
+
                 default:
+                    Cart.AddToCart(new MenuItem());
                     return RedirectToAction("Index");
             }
-        }
-
-
-        public IActionResult AddToBuildYourOwnCart(int targetFoodID)
-        {
-            List<MenuItem> tempMenu = LoadJson(MenuType.Custom);
-
-            foreach (MenuItem item in tempMenu)
-            {
-                if (item.food_id == targetFoodID)
-                {
-                    BuildYourOwnCart.AddOption(item);
-                }
-            }
-
-            return RedirectToAction("BuildYourOwn");
-        }
-
-        public IActionResult CreateBuildYourOwn()
-        {
-            BuildYourOwnCart.SendToCart();
-            return RedirectToAction("Index");
         }
     }
 
@@ -122,16 +200,7 @@ namespace Hillarys_Pizzeria_Project.Controllers
         Pizza = 0,
         Sides = 1,
         Drinks = 2,
-        Custom = 3
-    }
-
-    //Format for User Defined Exceptions found at:
-    //https://docs.microsoft.com/en-us/dotnet/standard/exceptions/how-to-create-user-defined-exceptions
-    public class NotValidMenuID:Exception
-    {
-        public NotValidMenuID(string message)
-            :base(message)
-        {
-        }
+        PizzaCustomization = 3,
+        BeverageSizes = 4
     }
 }

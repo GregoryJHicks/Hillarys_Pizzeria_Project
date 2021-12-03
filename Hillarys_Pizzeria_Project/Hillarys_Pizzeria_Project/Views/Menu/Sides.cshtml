@@ -13,7 +13,7 @@
         <p>
         @item.food_id @item.food_name @item.description @item.price
         </p>
-        @Html.ActionLink("Add To Cart", "AddToCart", new { food_id = item.food_id, menu = MenuType.Sides})
+        @Html.ActionLink("Add To Cart", "AddToCart", new { item = item, menu = MenuType.Sides})
         <br />
     }
 }

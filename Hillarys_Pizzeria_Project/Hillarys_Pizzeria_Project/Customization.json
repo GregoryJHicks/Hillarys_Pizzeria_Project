@@ -1,0 +1,20 @@
+[
+  {
+    "food_id": 400,
+    "food_name": "Pepperoni",
+    "price": 0.75,
+    "description": "Pepperoni description"
+  },
+  {
+    "food_id": 401,
+    "food_name": "Mushrooms",
+    "price": 0.75,
+    "description": "Mushrooms description"
+  },
+  {
+    "food_id": -1,
+    "food_name": "",
+    "price": -1,
+    "description": ""
+  }
+]
