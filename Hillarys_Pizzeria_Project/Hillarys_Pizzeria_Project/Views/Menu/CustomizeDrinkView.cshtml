@@ -1,0 +1,58 @@
+﻿@model List<Hillarys_Pizzeria_Project.Models.MenuItem>
+@using Hillarys_Pizzeria_Project.Controllers
+
+
+@{
+    MenuItem selectedDrink = Model[Model.Count - 1];
+    List<MenuItem> sizes = new List<MenuItem>();
+
+    foreach (MenuItem item in Model)
+    {
+        if (item != selectedDrink)
+        {
+            sizes.Add(item);
+        }
+    }
+}
+
+
+<h3>Select a size for: @selectedDrink.food_name</h3>
+<p>Base price: $@selectedDrink.price</p>
+
+@{
+    if (CustomizeDrink.isSizeSelected)
+    {
+        <br />
+        decimal currentPrice = selectedDrink.price + CustomizeDrink.selectedSize.price;
+        <p>
+            Current selected size: @CustomizeDrink.selectedSize.food_name
+            Current price: $@currentPrice
+        </p>
+    }
+    else
+    {
+        <br />
+        <p>No currently selected size.</p>
+    }
+
+    foreach (MenuItem item in sizes)
+    {
+        <br />
+        <p>@item.food_name : +$@item.price</p> 
+        <p>
+            @Html.ActionLink("Select " + @item.food_name, "SetDrinkSize",
+                new {sizeID = item.food_id, selectedItemID = selectedDrink.food_id})
+        </p>
+    }
+
+    <br />
+    if (CustomizeDrink.isSizeSelected)
+    {
+        @Html.ActionLink("Add " + selectedDrink.food_name + " to Cart", "AddToCart", 
+            new {selectedItemID = selectedDrink.food_id, menu = MenuType.Drinks})
+    }
+    else
+    {
+        <p>Please select a size before adding your selection to your cart</p>
+    }
+}

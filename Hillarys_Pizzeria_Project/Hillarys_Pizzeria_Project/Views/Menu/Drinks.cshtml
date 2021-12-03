@@ -13,7 +13,7 @@
         <p>
         @item.food_id @item.food_name @item.description @item.price
         </p>
-        @Html.ActionLink("Add To Cart", "CustomizeItem", new { menu = MenuType.BeverageSizes})
+        @Html.ActionLink("Add To Cart", "CustomizeItem", new { menu = MenuType.BeverageSizes, selectedItemID = item.food_id})
         <br />
     }
 }

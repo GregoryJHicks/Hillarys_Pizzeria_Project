@@ -1,15 +1,51 @@
 [
   {
-    "food_id": 400,
+    "food_id": 100,
     "food_name": "Pepperoni",
     "price": 0.75,
-    "description": "Pepperoni description"
+    "description": "Added Pepperoni"
+  },
+  {
+    "food_id": 101,
+    "food_name": "Mushrooms",
+    "price": 0.75,
+    "description": "Added Mushrooms"
+  },
+  {
+    "food_id": 200,
+    "food_name": "small size place holder",
+    "price": 999,
+    "description": "small holder"
+  },
+  {
+    "food_id": 201,
+    "food_name": "medium size place holder",
+    "price": 999,
+    "description": "medium holder"
+  },
+  {
+    "food_id": 300,
+    "food_name": "Original Crust",
+    "price": 0,
+    "description": "Original Crust"
+  },
+  {
+    "food_id": 301,
+    "food_name": "Stuffed Crust",
+    "price": 1.50,
+    "description": "Stuffed Crust"
+  },
+  {
+    "food_id": 400,
+    "food_name": "Small holder",
+    "price": 0,
+    "description": "Small holder"
   },
   {
     "food_id": 401,
-    "food_name": "Mushrooms",
-    "price": 0.75,
-    "description": "Mushrooms description"
+    "food_name": "Medium holder",
+    "price": 999,
+    "description": "Medium holder"
   },
   {
     "food_id": -1,

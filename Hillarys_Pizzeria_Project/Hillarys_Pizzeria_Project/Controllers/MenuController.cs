@@ -29,7 +29,45 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View(menu);
         }
 
-        public IActionResult CustomizeItem(MenuType type, int ID)
+        public IActionResult CustomizeDrinkView(int selectedItemID)
+        {
+            List<MenuItem> drinks = LoadJson(MenuType.Drinks);
+            List<MenuItem> beverageSizes = LoadJson(MenuType.BeverageSizes);
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in drinks)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            beverageSizes.Add(selectedItem);
+
+            return View(beverageSizes);
+        }
+
+        public IActionResult CustomizePizzaView(int selectedItemID)
+        {
+            List<MenuItem> pizzas = LoadJson(MenuType.Pizza);
+            List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in pizzas)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            pizzaCustomization.Add(selectedItem);
+
+            return View(pizzaCustomization);
+        }
+
+        public IActionResult CustomizeItem(MenuType type, int selectedItemID)
         {
             List<MenuItem> list, menu;
             switch (type)
@@ -38,7 +76,7 @@ namespace Hillarys_Pizzeria_Project.Controllers
                     list = LoadJson(MenuType.PizzaCustomization);
                     menu = LoadJson(MenuType.Pizza);
                     break;
-                default: //Sides options
+                default: //Drinks options
                     list = LoadJson(MenuType.BeverageSizes);
                     menu = LoadJson(MenuType.Drinks);
                     break;
@@ -46,7 +84,7 @@ namespace Hillarys_Pizzeria_Project.Controllers
 
             foreach (MenuItem item in menu)
             {
-                if (item.food_id == ID)
+                if (item.food_id == selectedItemID)
                 {
                     list.Add(item);
                     break;
@@ -141,51 +179,153 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return menu;
         }
 
-        public IActionResult ResetToppingSelecion(MenuItem selectedItem)
+        public IActionResult ResetToppingSelecion(int selectedItemID)
         {
-            CustomizePizza.ResetToppings();
-            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
-        }
+            List<MenuItem> pizza = LoadJson(MenuType.Pizza);
+            MenuItem selectedItem = new MenuItem();
 
-        public IActionResult AddPizzaTopping(MenuItem topping, MenuItem selectedItem)
-        {
-            CustomizePizza.AddTopping(topping);
-            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
-        }
-
-        public IActionResult SetPizzaSize(MenuItem size, MenuItem selectedItem)
-        {
-            CustomizePizza.SelectSize(size);
-            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
-        }
-
-        public IActionResult SetPizzaCrust(MenuItem crust, MenuItem selectedItem)
-        {
-            CustomizePizza.SelectCrust(crust);
-            return RedirectToAction("CustomizeItem", new { type = MenuType.PizzaCustomization, ID = selectedItem.food_id });
-        }
-
-        public IActionResult SetDrinkSize(MenuItem size, MenuItem selectedItem)
-        {
-            CustomizeDrink.SelectSize(size);
-            return RedirectToAction("CustomizeItem", new { type = MenuType.BeverageSizes, ID = selectedItem.food_id });
-        }
-
-
-        public IActionResult AddToCart(MenuItem item, MenuType menu)
-        {
-             switch (menu)
+            foreach (MenuItem item in pizza)
             {
-                case MenuType.BeverageSizes:
-                    CustomizeDrink.SendToCart(item);
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            CustomizePizza.ResetToppings();
+            return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
+        }
+
+        public IActionResult AddTopping(int toppingID, int selectedItemID)
+        {
+            List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
+            List<MenuItem> pizza = LoadJson(MenuType.Pizza);
+            MenuItem topping = new MenuItem();
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in pizzaCustomization)
+            {
+                if (item.food_id == toppingID)
+                {
+                    topping = item;
+                }
+            }
+            foreach (MenuItem item in pizza)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            CustomizePizza.AddTopping(topping);
+            return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
+        }
+
+        public IActionResult SetPizzaSize(int sizeID, int selectedItemID)
+        {
+            List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
+            List<MenuItem> pizza = LoadJson(MenuType.Pizza);
+            MenuItem size = new MenuItem();
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in pizzaCustomization)
+            {
+                if (item.food_id == sizeID)
+                {
+                    size = item;
+                }
+            }
+            foreach (MenuItem item in pizza)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            CustomizePizza.SelectSize(size);
+            return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
+        }
+
+        public IActionResult SetPizzaCrust(int crustID, int selectedItemID)
+        {
+            List<MenuItem> pizzaCustomization = LoadJson(MenuType.PizzaCustomization);
+            List<MenuItem> pizza = LoadJson(MenuType.Pizza);
+            MenuItem crust = new MenuItem();
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in pizzaCustomization)
+            {
+                if (item.food_id == crustID)
+                {
+                    crust = item;
+                }
+            }
+            foreach (MenuItem item in pizza)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            CustomizePizza.SelectCrust(crust);
+            return RedirectToAction("CustomizePizzaView", new { selectedItemID = selectedItem.food_id });
+        }
+
+        public IActionResult SetDrinkSize(int sizeID, int selectedItemID)
+        {
+            List<MenuItem> sizeOptions = LoadJson(MenuType.BeverageSizes);
+            List<MenuItem> drinks = LoadJson(MenuType.Drinks);
+            MenuItem size = new MenuItem();
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in sizeOptions)
+            {
+                if (item.food_id == sizeID)
+                {
+                    size = item;
+                }
+            }
+            foreach (MenuItem item in drinks)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            CustomizeDrink.SelectSize(size);
+            return RedirectToAction("CustomizeDrinkView", new { selectedItemID = selectedItem.food_id });
+        }
+
+
+        public IActionResult AddToCart(int selectedItemID, MenuType menu)
+        {
+            List<MenuItem> menuItems = LoadJson(menu);
+            MenuItem selectedItem = new MenuItem();
+
+            foreach (MenuItem item in menuItems)
+            {
+                if (item.food_id == selectedItemID)
+                {
+                    selectedItem = item;
+                }
+            }
+
+            switch (menu)
+            {
+                case MenuType.Drinks:
+                    CustomizeDrink.SendToCart(selectedItem);
                     return RedirectToAction("Drinks");
 
-                case MenuType.PizzaCustomization:
-                    CustomizePizza.SendToCart(item);
+                case MenuType.Pizza:
+                    CustomizePizza.SendToCart(selectedItem);
                     return RedirectToAction("Pizzas");
 
                 case MenuType.Sides:
-                    Cart.AddToCart(item);
+                    Cart.AddToCart(selectedItem);
                     return RedirectToAction("Sides");
 
                 default:
