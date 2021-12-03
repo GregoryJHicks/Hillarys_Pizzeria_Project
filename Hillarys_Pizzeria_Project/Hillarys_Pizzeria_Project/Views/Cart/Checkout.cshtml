@@ -3,6 +3,30 @@
 @{
     if(Cart.IsNotEmpty())
     {
+        <p>Items in Cart:</p>
+        <br />
+        int count = 0;
+        string output;
+        foreach (var item in Cart.contents)
+        {
+            count++;
+            output = "Item #" + Convert.ToString(count) + ": ";
+            <p>
+                @output @item.food_name
+            </p>
+            <p>
+                @output @item.description
+            </p>
+            <p>
+                @output @item.price
+            </p>
+            <br />
+        }
+
+        <p>
+            Cart SubTotal: @Cart.CalculateSubTotal()
+        </p>
+
         <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Payment">To Payment</a>
     }
     else
