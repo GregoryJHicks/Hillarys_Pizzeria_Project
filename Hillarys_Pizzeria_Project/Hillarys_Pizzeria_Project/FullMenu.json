@@ -1,0 +1,38 @@
+[
+  {
+    "food_id": 100,
+    "food_name": "Pepperoni Pizza",
+    "price": 3.99,
+    "description": "Its your classic Pepperoni Pizza"
+  },
+  {
+    "food_id": 101,
+    "food_name": "Cheese Pizza",
+    "price": 3.99,
+    "description": "Just boring old Cheese Pizza"
+  },
+  {
+    "food_id": 200,
+    "food_name": "Fries",
+    "price": 1.99,
+    "description": "Classic steak cut french fries"
+  },
+  {
+    "food_id": 201,
+    "food_name": "Ceaser Salad",
+    "price": 3.99,
+    "description": "Classic Cesear Salad"
+  },
+  {
+    "food_id": 300,
+    "food_name": "Coke",
+    "price": 3.99,
+    "description": "Its Coke"
+  },
+  {
+    "food_id": 301,
+    "food_name": "Dr. Pepper",
+    "price": 3.99,
+    "description": "Its Dr. Pepper"
+  }
+]
