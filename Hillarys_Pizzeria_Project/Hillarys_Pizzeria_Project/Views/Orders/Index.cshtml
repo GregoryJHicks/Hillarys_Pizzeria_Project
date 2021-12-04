@@ -1,45 +1,47 @@
 ﻿@using Hillarys_Pizzeria_Project.Controllers;
 
 @{
-    <p>Previously placed orders:</p>
+    <h1>Previously placed orders:</h1>
     if (PlacedOrderList.contents.Count() > 0)
     {
         foreach (Order item in PlacedOrderList.contents)
         {
             <p>
-                <pre>
-                    Order placed by: @item.FirstName @item.LastName
-                    Delivered to: @item.StreetAddress, @item.City @item.State
-                    Order placed at: @item.DateCreated
-                    Order contents:
-                </pre>
+<pre style="font-family:sans-serif; font-size:large;">
+Order placed by: @item.FirstName @item.LastName
+Delivered to: @item.StreetAddress, @item.City @item.State
+Order placed at: @item.DateCreated
+Order contents:</pre>
             </p>
             foreach (MenuItem i in item.Content)
             {
+                <hr/>
                 <p>
-                    <pre>
                         @i.food_name: $@i.price
-                    </pre>
                 </p>
+                
             }
             <p>
-                <pre>
-                    Subtotal: @item.SubTotal
-                    Tax: @item.Tax
-                    Total: @item.Total
-                </pre>
+<pre style="font-family:sans-serif; font-size:large;">
+Subtotal: @item.SubTotal
+Tax: @item.Tax
+Total: @item.Total
+</pre>
             </p>
+            <div style="font-size:large;">
             @Html.ActionLink("View Receipt", "Receipt", new { targetID = item.OrderID})
+            </div>
             <br />
         }
     }
     else
     {
-        <p>
-            <pre>
-                No orders have been placed so far.
-                Check out our @Html.ActionLink("menu", "Index", "Menu") to begin.
-            </pre>
-        </p>
+        <br/>
+            <p style="font-size:large; font-family:sans-serif;">
+            No orders have been placed so far.
+            </p>
+            <p style="font-size:large; font-family:sans-serif;">
+            Check out our @Html.ActionLink("menu", "Index", "Menu") to begin.
+            </p>
     }
 }
