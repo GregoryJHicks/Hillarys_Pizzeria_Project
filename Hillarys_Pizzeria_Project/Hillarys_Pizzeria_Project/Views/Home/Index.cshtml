@@ -1,28 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
-
-
-<div class="text-center">
-    <h1> &nbsp; &nbsp; &nbsp; Welcome to Hillary's Pizzaeria!</h1>
-    <div>
-        <pre style="font-family:sans-serif; font-size:medium">
-            Hello and welcome to Hillary's Pizzeria! We're family owned and operated since 2005,
-            bringing the family to our Family Friendly Resturant. Our dough is made fresh 
-            daily and our hand-tossed pies are topped with the fresshest ingreidents. Coming
-            from New Jersey, we have years of experience that we've brough to the atlanta 
-            area, making our mark in the Heart of the South.
-       </pre>
-    </div>
-    <br/>
-    <div>
-        <pre style="font-family:sans-serif;">
-            We are located at 1234 
-            Breadwell Rd, Milton, GA
-            30004
-        </pre>
-    </div>
-    
-    </div>
-
+<form asp-action="Home">
+  <label for="uname">User Name:</label><br>
+  <input type="text" id="uname" name="uname"><br>
+  <label for="pass">Password:</label><br>
+  <input type="password" id="pass" name="pass"><br><br>
+  <input type="submit" value="Submit">
+</form>
