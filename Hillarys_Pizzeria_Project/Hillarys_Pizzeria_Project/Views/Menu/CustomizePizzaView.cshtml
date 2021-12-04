@@ -147,8 +147,10 @@
     <br />
     if (CustomizePizza.isSizeSelected & CustomizePizza.isCrustSelected)
     {
+        <div style="font-size:large;">
         @Html.ActionLink("Add " + selectedPizza.food_name + " to cart", "AddToCart", 
             new {selectedItemID = selectedPizza.food_id, menu = MenuType.Pizza})
+            </div>
     }
     else
     {

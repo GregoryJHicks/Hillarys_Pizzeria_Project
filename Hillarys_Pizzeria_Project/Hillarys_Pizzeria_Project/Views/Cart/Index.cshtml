@@ -1,29 +1,42 @@
-﻿@{
+﻿<style>
+    .menuButton{
+        height: 45px;
+        width: 240px;
+        border: 2px solid black;
+        font-size: large;
+        font-weight:bold;
+    }
+</style>
+@{
     if(Cart.IsNotEmpty())
     {
-        <p>
+        <p style="font-size: x-large;">
             Your Cart:
         </p>
-        <br />
         int i = 0;
+        <hr/>
         foreach(MenuItem item in Cart.contents)
         {
             i++;
             string output = "Item #" + Convert.ToString(i) + ":";
+
+            <p style="font-size:large;">
+                @output @item.food_name
+            </p>
             <p>
-                @output @item.food_name - $@item.price
+                &emsp; &emsp; $@item.price
             </p>
             @Html.ActionLink("Remove " + @item.food_name, "RemoveFromCart", "Menu", new {targetID = item.food_id})
             <br />
         }
 
         <br />
-        <p>Cart SubTotal: $@Cart.CalculateSubTotal()</p>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Checkout">To Checkout</a>
+        <p style="font-size:x-large">Cart SubTotal: $@Cart.CalculateSubTotal()</p>
+        <a class="nav-link text-dark menuButton" asp-area="" asp-controller="Cart" asp-action="Checkout">To Checkout</a>
     }
     else
     {
-        <p>
+        <p style="font-size: large;">
             There is nothing in your cart at the moment.
             Consider adding something from our @Html.ActionLink("Menu", "Index", "Menu")
         </p>
