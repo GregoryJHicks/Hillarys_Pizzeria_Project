@@ -27,6 +27,7 @@
                 &emsp; &emsp; $@item.price
             </p>
             @Html.ActionLink("Remove " + @item.food_name, "RemoveFromCart", "Menu", new {targetID = item.food_id})
+            <hr />
             <br />
         }
 
