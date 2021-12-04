@@ -7,14 +7,15 @@
 @{
     if(Cart.IsNotEmpty())
     {
-        <p>Order Contents:</p>
+        <p style="font-size: x-large;">Order Contents:</p>
+        <hr />
         int i = 0;
         string output;
         foreach (var item in Cart.contents)
         {
             i++;
             output = "Item #" + Convert.ToString(i) + ": ";
-            <p>
+            <p style="font-size: large;">
                 @output @item.food_name
             </p>
             <p>
@@ -23,10 +24,9 @@
             <p>
                 Price: $@item.price
             </p>
-            <br />
+            <hr />
         }
-
-        <p>
+        <p style="font-size: large;">
             Price breakdown:
         </p>
         <p>
@@ -42,9 +42,7 @@
 <!-- Auto generated form - START -->
 
 
-        <h1>CreateTemplate</h1>
-
-        <h4>Order</h4>
+        <p style="font-size: x-large;">Billing information</p>
         <hr />
         <div class="row">
             <div class="col-md-4">
@@ -105,6 +103,7 @@
                         <input asp-for="CVV" class="form-control" minlength="3" maxlength="4" required/>
                         <span asp-validation-for="CVV" class="text-danger"></span>
                     </div>
+                    <br/>
                     <div asp-validation-summary="ModelOnly" ></div>
                     <div class="form-group">
                         <input type="submit" value="Place Order" class="btn btn-primary" />
@@ -116,7 +115,7 @@
 
 <!-- Auto generated form - END -->
 
-        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Payment">To Payment</a>
+        
     }
     else
     {
