@@ -10,6 +10,18 @@
             contents.Add(item);
         }
 
+        public static void RemoveFromCart(MenuItem targetItem)
+        {
+            try
+            {
+                contents.Remove(targetItem);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         public static void ResetCart()
         {
             contents.Clear();

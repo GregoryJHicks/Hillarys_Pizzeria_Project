@@ -1,36 +1,129 @@
-﻿
+﻿@model Hillarys_Pizzeria_Project.Models.Order
+
+@{
+    ViewData["Title"] = "CreateTemplate";
+}
 
 @{
     if(Cart.IsNotEmpty())
     {
-        <p>Items in Cart:</p>
-        <br />
-        int count = 0;
+        <p>Order Contents:</p>
+        int i = 0;
         string output;
         foreach (var item in Cart.contents)
         {
-            count++;
-            output = "Item #" + Convert.ToString(count) + ": ";
+            i++;
+            output = "Item #" + Convert.ToString(i) + ": ";
             <p>
                 @output @item.food_name
             </p>
             <p>
-                @output @item.description
+                Description: @item.description
             </p>
             <p>
-                @output @item.price
+                Price: $@item.price
             </p>
             <br />
         }
 
         <p>
-            Cart SubTotal: @Cart.CalculateSubTotal()
+            Price breakdown:
         </p>
+        <p>
+            SubTotal: $@Cart.CalculateSubTotal()
+        </p>
+        <p>
+            Tax Due: $@Cart.CalculateTax()
+        </p>
+        <p>
+            Final Total: $@Cart.CalculateTotal()
+        </p>
+
+<!-- Auto generated form - START -->
+
+
+        <h1>CreateTemplate</h1>
+
+        <h4>Order</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="ProcessNewOrder">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label">First Name</label>
+                        <input asp-for="FirstName" class="form-control" minlength="1" maxlength="20" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label">Last Name</label>
+                        <input asp-for="LastName" class="form-control" minlength="1" maxlength="20" required/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" minlength="10" maxlength="10" required/>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StreetAddress" class="control-label">Street Address</label>
+                        <input asp-for="StreetAddress" class="form-control" minlength="1" maxlength="40" required/>
+                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label">City</label>
+                        <input asp-for="City" class="form-control" minlength="1" maxlength="36" required/>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="State" class="control-label">State</label>
+                        <input asp-for="State" class="form-control" minlength="1" maxlength="40" required/>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DeliveryInstructions" class="control-label">Delivery Instrutions</label>
+                        <input asp-for="DeliveryInstructions" class="form-control" />
+                        <span asp-validation-for="DeliveryInstructions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CardNumber" class="control-label">Card Number</label>
+                        <input asp-for="CardNumber" class="form-control" minlength="16" maxlength="16" required/>
+                        <span asp-validation-for="CardNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ExpirationMonth" class="control-label">Expiration Month</label>
+                        <input asp-for="ExpirationMonth" class="form-control" minlength="2" maxlength="2" required/>
+                        <span asp-validation-for="ExpirationMonth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ExpirationYear" class="control-label">Expiration Year</label>
+                        <input asp-for="ExpirationYear" class="form-control" minlength="4" maxlength="4" required/>
+                        <span asp-validation-for="ExpirationYear" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CVV" class="control-label">CVV</label>
+                        <input asp-for="CVV" class="form-control" minlength="3" maxlength="4" required/>
+                        <span asp-validation-for="CVV" class="text-danger"></span>
+                    </div>
+                    <div asp-validation-summary="ModelOnly" ></div>
+                    <div class="form-group">
+                        <input type="submit" value="Place Order" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+<!-- Auto generated form - END -->
 
         <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Payment">To Payment</a>
     }
     else
     {
-        <p>Nothing to purchase</p>
+        <p>Nothing to purchase</p> //This honestly should never be reached so you wont need to worry about this too much
     }
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

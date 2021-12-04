@@ -12,9 +12,10 @@
         public string? DeliveryInstructions { get; set; }
         public List<MenuItem> Content { get; set; }
         public int CardNumber { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public string ExpirationMonth { get; set; }
+        public string ExpirationYear { get; set; }
         public int CVV { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime dateCreated { get; set; }
 
     }
 }
