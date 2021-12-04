@@ -1,28 +1,31 @@
-﻿<h1>
-    Test
-</h1>
-
-<p>
-    Number of items in cart: @Cart.contents.Count()
-</p>
-<br />
-
-@{
-    if(Cart.contents.Count() > 0)
-    {
-        foreach(MenuItem item in Cart.contents)
-        {
-            <p>
-                Food item: @item.food_name
-            </p>
-            <br />
-        }
-    }
-}
-
-@{
+﻿@{
     if(Cart.IsNotEmpty())
     {
+        <p>
+            Your Cart:
+        </p>
+        <br />
+        int i = 0;
+        foreach(MenuItem item in Cart.contents)
+        {
+            i++;
+            string output = "Item #" + Convert.ToString(i) + ":";
+            <p>
+                @output @item.food_name - $@item.price
+            </p>
+            @Html.ActionLink("Remove " + @item.food_name, "RemoveItem", new {targetID = item.food_id})
+            <br />
+        }
+
+        <br />
+        <p>Cart SubTotal: $@Cart.CalculateSubTotal()</p>
         <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Checkout">To Checkout</a>
+    }
+    else
+    {
+        <p>
+            There is nothing in your cart at the moment.
+            Consider adding something from our @Html.ActionLink("Menu", "Index", "Menu")
+        </p>
     }
 }

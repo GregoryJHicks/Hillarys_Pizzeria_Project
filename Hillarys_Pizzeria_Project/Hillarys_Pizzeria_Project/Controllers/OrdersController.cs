@@ -31,5 +31,10 @@ namespace Hillarys_Pizzeria_Project.Controllers
         {
             return RedirectToAction("Receipt", PlacedOrderList.MostRecentID());
         }
+
+        public IActionResult RemoveItem(int targetID)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
