@@ -5,16 +5,31 @@
 @{
     ViewData["Title"] = "Pizza Menu";
 }
+<style>
+    .menuButton{
+        height: 45px;
+        width: 240px;
+        border: 2px solid black;
+        font-size: large;
+        font-weight:bold;
+    }
+</style>
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="Index">Back to Menu Selection</a>
+<a class="nav-link text-dark menuButton" asp-area="" asp-controller="Menu" asp-action="Index">Back to Menu Selection</a>
 
 @{
     foreach (var item in Model)
     {
+        <h1>@item.food_name</h1>
         <p>
-        @item.food_id @item.food_name @item.description @item.price
+        <pre style="font-family:sans-serif; font-size:medium;">
+        @item.description 
+        $ @item.price
+        </pre>
         </p>
         @Html.ActionLink("Add To Cart", "CustomizePizzaView", new {selectedItemID = item.food_id})
+        <hr>
+        <br />
         <br />
     }
 }
