@@ -12,16 +12,64 @@
     "description": "Added Mushrooms"
   },
   {
+    "food_id": 102,
+    "food_name": "Bacon",
+    "price": 0.75,
+    "description": "Added Bacon"
+  },
+  {
+    "food_id": 103,
+    "food_name": "Sausage",
+    "price": 0.75,
+    "description": "Added Sausage"
+  },
+  {
+    "food_id": 104,
+    "food_name": "Bell Peppers",
+    "price": 0.75,
+    "description": "Added Bell Peppers"
+  },
+  {
+    "food_id": 105,
+    "food_name": "Onion",
+    "price": 0.75,
+    "description": "Added Onion"
+  },
+  {
+    "food_id": 106,
+    "food_name": "Spinach",
+    "price": 0.75,
+    "description": "Added Spinach"
+  },
+  {
+    "food_id": 107,
+    "food_name": "Extra Cheese",
+    "price": 0.75,
+    "description": "Added Extra Cheese"
+  },
+  {
     "food_id": 200,
-    "food_name": "small size place holder",
-    "price": 999,
-    "description": "small holder"
+    "food_name": "Small Pizza",
+    "price": 3.99,
+    "description": "Small pizza"
   },
   {
     "food_id": 201,
-    "food_name": "medium size place holder",
-    "price": 999,
-    "description": "medium holder"
+    "food_name": "Medium Pizza",
+    "price": 4.99,
+    "description": "Medium pizza"
+  },
+  {
+    "food_id": 202,
+    "food_name": "Large Pizza",
+    "price": 7.99,
+    "description": "Large Pizza"
+  },
+  {
+    "food_id": 203,
+    "food_name": "Extra Large Pizza",
+    "price": 10.99,
+    "description": "Extra Large Pizza"
   },
   {
     "food_id": 300,
@@ -36,6 +84,12 @@
     "description": "Stuffed Crust"
   },
   {
+    "food_id": 302,
+    "food_name": "Thin Crust",
+    "price": 0.75,
+    "description": "Thin Crust"
+  },
+  {
     "food_id": 400,
     "food_name": "Small holder",
     "price": 0,
@@ -44,8 +98,14 @@
   {
     "food_id": 401,
     "food_name": "Medium holder",
-    "price": 999,
+    "price": 1.99,
     "description": "Medium holder"
+  },
+  {
+    "food_id": 402,
+    "food_name": "Large holder",
+    "price": 3.99,
+    "description": "Large holder"
   },
   {
     "food_id": -1,

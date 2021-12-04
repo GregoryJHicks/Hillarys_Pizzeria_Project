@@ -12,13 +12,13 @@
 
         public static void RemoveFromCart(MenuItem targetItem)
         {
-            try
+
+            foreach (MenuItem item in contents)
             {
-                contents.Remove(targetItem);
-            }
-            catch
-            {
-                return;
+                if (item.food_id == targetItem.food_id)
+                {
+                    contents.RemoveAt(contents.IndexOf(item));
+                }
             }
         }
 

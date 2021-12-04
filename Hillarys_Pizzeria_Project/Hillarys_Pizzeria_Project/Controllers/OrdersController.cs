@@ -10,31 +10,54 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View();
         }
 
-        public IActionResult Receipt()//Receipt for just generated order
+        public IActionResult Receipt(int? targetID)
         {
-            return View(PlacedOrderList.contents[PlacedOrderList.MostRecentID()]);
-        }
-
-        public IActionResult Receipt(int targetID)//Select an order to get its receipt
-        {
-            if (targetID <= PlacedOrderList.contents.Count() - 1)
+            if (targetID != null)
             {
-                return View(PlacedOrderList.GetOrder(targetID));
+                if (targetID <= PlacedOrderList.count - 1)
+                {
+                    return View(PlacedOrderList.GetOrder((int)targetID));
+                }
             }
-            else
+            return View(PlacedOrderList.GetMostRecentOrder());
+        }
+
+
+        public IActionResult GenerateNewOrder(string firstName, string lastName, string phoneNumber,
+            string streetAddress, string city, string state, string? deliveryInstructions, string cardNumber,
+            string expirationDate, string CVV)
+        {
+            Order newOrder = new Order();
+
+            newOrder.FirstName = firstName;
+            newOrder.LastName = lastName;
+            newOrder.PhoneNumber = phoneNumber;
+            newOrder.StreetAddress = streetAddress;
+            newOrder.City = city;
+            newOrder.State = state;
+            if (deliveryInstructions != null)
             {
-                return RedirectToAction("Receipt");
+                newOrder.DeliveryInstructions = deliveryInstructions;
             }
-        }
+            newOrder.CardNumber = cardNumber;
+            newOrder.CVV = CVV;
+            newOrder.ExpirationDate = expirationDate;
+            newOrder.DateCreated = DateTime.Now;
+            newOrder.Content = new List<MenuItem>();
+            newOrder.SubTotal = Cart.CalculateSubTotal();
+            newOrder.Tax = Cart.CalculateTax();
+            newOrder.Total = Cart.CalculateTotal();
+            newOrder.OrderID = PlacedOrderList.GetNewOrderID();
 
-        public IActionResult GenerateNewOrder()
-        {
-            return RedirectToAction("Receipt", PlacedOrderList.MostRecentID());
-        }
+            foreach (MenuItem item in Cart.contents)
+            {
+                newOrder.Content.Add(item);
+            }
 
-        public IActionResult RemoveItem(int targetID)
-        {
-            return RedirectToAction("Index");
+            Cart.ResetCart();
+            PlacedOrderList.AddOrder(newOrder);
+
+            return RedirectToAction("Receipt", PlacedOrderList.GetMostRecentOrder().OrderID);
         }
     }
 }

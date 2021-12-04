@@ -1,12 +1,50 @@
 ﻿@model Hillarys_Pizzeria_Project.Models.Order;
 
 @{
-    if (Model.Content != null && Model.Content.Count() > 0)
+    if (Model != null)
     {
-        foreach(MenuItem item in Model.Content)
+        string deliveryDesc = "";
+        if (Model.DeliveryInstructions != null)
         {
-            <p>@item.food_name</p>
-            <br />
+            deliveryDesc += Model.DeliveryInstructions;
+        }
+        else
+        {
+            deliveryDesc = "No delivery instructions were provided.";
+        }
+        <p>
+            <pre>
+                Name: @Model.FirstName @Model.LastName
+                PhoneNumber: @Model.PhoneNumber
+                Address: @Model.StreetAddress, @Model.City @Model.State
+                Delivery Instructions: @deliveryDesc
+                Card Number: @Model.CardNumber
+                Expiration Date: @Model.ExpirationDate
+                CVV: @Model.CVV
+                Time Placed: @Model.DateCreated
+            </pre>
+        </p>
+        if (Model.Content != null && Model.Content.Count() > 0)
+        {
+            <p>
+                <pre>
+                    Order Contents:
+                </pre>
+            </p>
+            int i = 0;
+            foreach(MenuItem item in Model.Content)
+            {
+                i++;
+                <p>
+                    <pre>
+
+                        Item #@i:
+                        @item.food_name
+                        @item.description
+                        @item.price
+                    </pre>
+                </p>
+            }
         }
     }
     else

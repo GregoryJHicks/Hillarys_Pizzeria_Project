@@ -22,14 +22,24 @@ namespace Hillarys_Pizzeria_Project.Controllers
             }
         }
 
-        public IActionResult CreateTemplate()
+        public IActionResult RemoveItem(int targetID)
         {
-            return View();
-        }
+            MenuItem targetItem = new MenuItem();
+            MenuType menu;
 
-        public IActionResult ProcessNewOrder(string firstName, string lastName, int phoneNumber, string streetAddress, string city, string state, string? deliveryInstructions, int cardNumber, DateTime expirationDate, int CVV)
-        {
-            return RedirectToAction("Index", "Home");
+            if (100 <= targetID & targetID <= 199)
+            {
+                menu = MenuType.Pizza;
+            }
+            else if (200 <= targetID & targetID <= 299)
+            {
+                menu = MenuType.Sides;
+            }
+            else
+            {
+                menu = MenuType.Drinks;
+            }
+            return RedirectToAction("Index");
         }
     }
 }

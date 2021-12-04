@@ -13,7 +13,7 @@
             <p>
                 @output @item.food_name - $@item.price
             </p>
-            @Html.ActionLink("Remove " + @item.food_name, "RemoveItem", new {targetID = item.food_id})
+            @Html.ActionLink("Remove " + @item.food_name, "RemoveFromCart", "Menu", new {targetID = item.food_id})
             <br />
         }
 

@@ -371,6 +371,45 @@ namespace Hillarys_Pizzeria_Project.Controllers
                     return RedirectToAction("Index");
             }
         }
+
+        public IActionResult RemoveFromCart(int targetID)
+        {
+            MenuType menu;
+
+            if (100 <= targetID & targetID <= 199)
+            {
+                menu = MenuType.Pizza;
+            }
+            else if (200 <= targetID & targetID <= 299)
+            {
+                menu = MenuType.Sides;
+            }
+            else
+            {
+                menu = MenuType.Drinks;
+            }
+
+            List<MenuItem> list = LoadJson(menu);
+            MenuItem targetItem = new MenuItem();
+
+            foreach (MenuItem item in list)
+            {
+                if (item.food_id == targetID)
+                {
+                    targetItem = item;
+                }
+            }
+            try
+            {
+                Cart.RemoveFromCart(targetItem);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+            return RedirectToAction("Index", "Cart");
+
+        }
     }
 
     public enum MenuType
