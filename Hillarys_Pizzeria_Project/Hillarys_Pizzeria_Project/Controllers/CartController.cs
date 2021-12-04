@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Hillarys_Pizzeria_Project.Models;
 
 namespace Hillarys_Pizzeria_Project.Controllers
 {
@@ -11,12 +12,14 @@ namespace Hillarys_Pizzeria_Project.Controllers
 
         public IActionResult Checkout()
         {
-            return View();
-        }
-
-        public IActionResult Payment()
-        {
-            return View();
+            if (Cart.IsNotEmpty())
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult CreateTemplate()
@@ -24,7 +27,7 @@ namespace Hillarys_Pizzeria_Project.Controllers
             return View();
         }
 
-        public IActionResult ProcessNewOrder()
+        public IActionResult ProcessNewOrder(string firstName, string lastName, int phoneNumber, string streetAddress, string city, string state, string? deliveryInstructions, int cardNumber, DateTime expirationDate, int CVV)
         {
             return RedirectToAction("Index", "Home");
         }
