@@ -12,6 +12,24 @@
     "description": "Just boring old Cheese Pizza"
   },
   {
+    "food_id": 102,
+    "food_name": "MeatLovers Pizza",
+    "price": 4.99,
+    "description": "Three meat pizza topped with Sausage, Pepperoni, and Bacon"
+  },
+  {
+    "food_id": 103,
+    "food_name": "Supreme Pizza",
+    "price": 4.99,
+    "description": "Comes topped with Pepperoni, Sausage, Bell peppers, Onions and Mushrooms"
+  },
+  {
+    "food_id": 104,
+    "food_name": "The Veggie",
+    "price": 3.99,
+    "description": "Comes topped with Spinach, Onion, Bell peppers, and Mushrooms"
+  },
+  {
     "food_id": 200,
     "food_name": "Fries",
     "price": 1.99,
@@ -24,6 +42,18 @@
     "description": "Classic Cesear Salad"
   },
   {
+    "food_id": 202,
+    "food_name": "Wings",
+    "price": 2.99,
+    "description": "Classic bone in Wings"
+  },
+  {
+    "food_id": 203,
+    "food_name": "Cheese Sticks",
+    "price": 3.99,
+    "description": "Classic Cheese Sticks"
+  },
+  {
     "food_id": 300,
     "food_name": "Coke",
     "price": 3.99,
@@ -34,5 +64,23 @@
     "food_name": "Dr. Pepper",
     "price": 3.99,
     "description": "Its Dr. Pepper"
+  },
+  {
+    "food_id": 302,
+    "food_name": "Sprite",
+    "price": 3.99,
+    "description": "Its Sprite"
+  },
+  {
+    "food_id": 303,
+    "food_name": "Lemonade",
+    "price": 3.99,
+    "description": "Its Lemonade"
+  },
+  {
+    "food_id": 304,
+    "food_name": "Sweet Tea",
+    "price": 3.99,
+    "description": "Its Sweet Tea"
   }
 ]

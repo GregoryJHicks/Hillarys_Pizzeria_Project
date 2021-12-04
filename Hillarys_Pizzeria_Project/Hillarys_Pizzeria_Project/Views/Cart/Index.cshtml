@@ -19,15 +19,15 @@
         {
             i++;
             string output = "Item #" + Convert.ToString(i) + ":";
-            
+
             <p style="font-size:large;">
                 @output @item.food_name
             </p>
             <p>
                 &emsp; &emsp; $@item.price
             </p>
-            @Html.ActionLink("Remove " + @item.food_name, "RemoveItem", new {targetID = item.food_id})
-            <hr/>
+            @Html.ActionLink("Remove " + @item.food_name, "RemoveFromCart", "Menu", new {targetID = item.food_id})
+            <br />
         }
 
         <br />

@@ -46,7 +46,7 @@
         <hr />
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="ProcessNewOrder">
+                <form asp-action="GenerateNewOrder" asp-controller="Orders">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="FirstName" class="control-label">First Name</label>
@@ -89,14 +89,9 @@
                         <span asp-validation-for="CardNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ExpirationMonth" class="control-label">Expiration Month</label>
-                        <input asp-for="ExpirationMonth" class="form-control" minlength="2" maxlength="2" required/>
-                        <span asp-validation-for="ExpirationMonth" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ExpirationYear" class="control-label">Expiration Year</label>
-                        <input asp-for="ExpirationYear" class="form-control" minlength="4" maxlength="4" required/>
-                        <span asp-validation-for="ExpirationYear" class="text-danger"></span>
+                        <label asp-for="ExpirationDate" class="control-label">Expiration Month</label>
+                        <input asp-for="ExpirationDate" class="form-control" required/>
+                        <span asp-validation-for="ExpirationDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="CVV" class="control-label">CVV</label>

@@ -3,15 +3,17 @@
     public static class PlacedOrderList
     {
         public static List<Order> contents = new List<Order>();
+        public static int count = 0;
 
         public static void AddOrder(Order order)
         {
             contents.Add(order);
+            count++;
         }
 
-        public static int MostRecentID()
+        public static Order GetMostRecentOrder()
         {
-            int result = contents.Count() - 1;
+            Order result = contents[count - 1];
             return result;
         }
 
@@ -20,9 +22,14 @@
             Order target = new Order();
             if (id < contents.Count)
             {
-                target = contents[id - 1];
+                target = contents[id];
             }
             return target;
+        }
+
+        public static int GetNewOrderID()
+        {
+            return count;
         }
     }
 }
